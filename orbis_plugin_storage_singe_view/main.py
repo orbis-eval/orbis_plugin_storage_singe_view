@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
+
 """Summary
 """
-from orbis import app
-from orbis.libs import files
+from orbis_eval import app
+from orbis_eval.libs import files
 from .html_templates import html_body
 
 import os
@@ -9,8 +11,8 @@ from palettable.tableau import Tableau_20
 from operator import itemgetter
 
 
-class SingleView(object):
-    """docstring for SingleView
+class Main(object):
+    """docstring for Main
 
     Attributes:
         config (TYPE): Description
@@ -26,7 +28,7 @@ class SingleView(object):
         Args:
             rucksack (TYPE): Description
         """
-        super(SingleView, self).__init__()
+        super(Main, self).__init__()
         self.rucksack = rucksack
         self.config = self.rucksack.open['config']
         self.data = self.rucksack.open['data']
