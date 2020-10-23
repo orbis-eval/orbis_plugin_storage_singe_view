@@ -2,13 +2,16 @@
 
 """Summary
 """
-from orbis_eval import app
+from orbis_eval.config import paths
 from orbis_eval.libs import files
 from .html_templates import html_body
 
 import os
 from palettable.tableau import Tableau_20
 from operator import itemgetter
+
+import logging
+logger = logging.getLogger(__name__)
 
 
 class Main(object):
@@ -33,7 +36,7 @@ class Main(object):
         self.config = self.rucksack.open['config']
         self.data = self.rucksack.open['data']
         self.pass_name = self.rucksack.open['config']['file_name'].split(".")[0]
-        self.folder = os.path.join(app.paths.output_path, "html_pages", self.pass_name)
+        self.folder = os.path.join(paths.output_path, "html_pages", self.pass_name)
 
     def _get_keys(self, item):
         """Summary
@@ -333,7 +336,7 @@ class Main(object):
     def run(self):
         """Summary
         """
-        app.logger.debug("Building HTML pages")
+        logger.debug("Building HTML pages")
         for item in self.rucksack.itemsview():
             timestamp = files.get_timestamp()
 
@@ -348,8 +351,8 @@ class Main(object):
             files.create_folder(file_dir)
             file_dir = os.path.join(file_dir, str(key) + ".html")
 
-            app.logger.debug(file_dir)
+            logger.debug(file_dir)
             with open(file_dir, "w") as open_file:
                 open_file.write(html)
 
-        app.logger.info("Finished building HTML pages")
+        logger.info("Finished building HTML pages")
